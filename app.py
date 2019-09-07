@@ -27,7 +27,7 @@ else:
 @app.route('/')
 def index():
     """Return homepage."""
-    return "Hello there user!"
+    #return "Hello there user!"
     # TODO: Extract query term from url
 
     # TODO: Make 'params' dict with query term and API key
@@ -38,8 +38,14 @@ def index():
 
     # TODO: Render the 'index.html' template, passing the gifs
     # as a named parameter
+    msg = 'Hello World!'
+    return render_template("index.html", msg = msg)
 
-    return render_template("index.html")
+@app.route('/getGif')
+def get_gif():
+    gif_type = request.args.get('giftype')
+    return "the gif type is " + gif_type
+
 
 
 if __name__ == '__main__':
