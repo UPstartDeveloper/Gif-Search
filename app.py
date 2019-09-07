@@ -43,9 +43,8 @@ def index():
 
 @app.route('/getGif')
 def get_gif():
-    gif_type = request.args.get('giftype')
-    return "the gif type is " + gif_type
-
+    gif_type = request.args.get('gif_type')
+    return 'The gif type you\'ve requested is ' + gif_type
 
 
 if __name__ == '__main__':
