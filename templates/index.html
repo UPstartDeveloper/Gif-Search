@@ -1,6 +1,10 @@
 
 <!-- TODO: Extend 'base.html' and put content into a block 'body' to match -->
+{% extends 'base.html' %}
 
+{% block content %}
+    <body>{{ msg }}</body>
+{% endblock %}
 <!-- TODO: Make an HTML form containing a search box and a submit button to add
     the search term to the query string -->
 
