@@ -3,7 +3,7 @@ import requests
 import json
 
 app = Flask(__name__)
-
+'''
 # lines inspired by https://tenor.com/gifapi/documentation#quickstart-search
 # set the API key and limit for search result
 api_key = "EDBOKVM2ES41"
@@ -22,7 +22,7 @@ if r.status_code == 200:
     print(top_ten)
 else:
     top_ten = None
-
+'''
 
 @app.route('/')
 def index():
