@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% if gif_list %}
+    Search results:
+    <ul>
+        {% for link in gif_list %}
+            <li><img src = link alt = gif_type/></li>
+        {% endfor %}
+    </ul>
+{% else %}
+    Sorry, I can't find anything for you right now.
+{% endif %}
+
+{% endblock %}

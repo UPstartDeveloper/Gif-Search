@@ -44,6 +44,7 @@ def get_gifs(gif_type):
             content = content[starting_content_index:]
             starting_content_index = content.find('"url"')
             gif_link = content[starting_content_index + 8: content.find(',') - 1]
+            gif_link = f"\'gif_link\'"
             gif_links.append(gif_link)
             content = content[content.find(',') - 1:]
         r.close()
@@ -60,7 +61,7 @@ def get_gif():
     displayString = ""
     for link in gif_list:
         displayString += link + '<br>'
-    return displayString
+    return render_template('results.html', gif_list=gif_list, gif_type=gif_type, link=link)
 
 # if __name__ == '__main__':
 #     app.run(debug=True)
