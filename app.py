@@ -10,60 +10,56 @@ app = Flask(__name__)
 api_key = "EDBOKVM2ES41"
 limit = 10  # number of search results
 
-# test search term
-search_term = "happiness"
+@app.route('/')
+def index():
+    # """Return homepage."""
+    # return "Hello there user!"
+    # TODO: Extract query term from url
 
-r = requests.get(
-    "https://api.tenor.com/v1/search?q=%s&key=%s&limit=%s" %
-    (search_term, api_key, limit))
+    # TODO: Make 'params' dict with query term and API key
 
-gif_links = []
+    # TODO: Make an API call to Tenor using the 'requests' library
 
-if r.status_code == 200:
-    # load the GIFs using the urls for smaller GIF sizes
-    content = str(r.content)
+    # TODO: Get the first 10 results from the search results
 
-    while len(gif_links) < 10:
-        starting_content_index = content.find('"mediumgif"')
-        content = content[starting_content_index:]
-        starting_content_index = content.find('"url"')
-        gif_link = content[starting_content_index + 8: content.find(',') - 1]
-        gif_links.append(gif_link)
-        content = content[content.find(',') - 1:]
+    # TODO: Render the 'index.html' template, passing the gifs
+    # as a named parameter
+    msg = 'GIF SEARCH!'
+    return render_template("index.html", msg = msg)
 
-    r.close()
+def get_gifs(gif_type):
+    r = requests.get(
+        "https://api.tenor.com/v1/search?q=%s&key=%s&limit=%s" %
+        (gif_type, api_key, limit))
 
-    for link in gif_links:
-        print(link)
-   
-else:
-    top_ten = None
+    gif_links = []
 
+    if r.status_code == 200:
+        # load the GIFs using the urls for smaller GIF sizes
+        content = str(r.content)
 
+        while len(gif_links) < 10:
+            starting_content_index = content.find('"mediumgif"')
+            content = content[starting_content_index:]
+            starting_content_index = content.find('"url"')
+            gif_link = content[starting_content_index + 8: content.find(',') - 1]
+            gif_links.append(gif_link)
+            content = content[content.find(',') - 1:]
+        r.close()
 
+        return gif_links    
+    else:
+        top_ten = None
+    
 
-# @app.route('/')
-# def index():
-#     """Return homepage."""
-#     return "Hello there user!"
-#     # TODO: Extract query term from url
-
-#     # TODO: Make 'params' dict with query term and API key
-
-#     # TODO: Make an API call to Tenor using the 'requests' library
-
-#     # TODO: Get the first 10 results from the search results
-
-#     # TODO: Render the 'index.html' template, passing the gifs
-#     # as a named parameter
-#     # msg = 'GIF SEARCH!'
-#     # return render_template("index.html", msg = msg)
-
-# @app.route('/getGif')
-# def get_gif():
-#     gif_type = request.args.get('gif_type')
-#     return 'The gif type you\'ve requested is ' + gif_type
-
+@app.route('/getGif')
+def get_gif():
+    gif_type = request.args.get('gif_type')
+    gif_list = get_gifs(gif_type)
+    displayString = ""
+    for link in gif_list:
+        displayString += link + '<br>'
+    return displayString
 
 # if __name__ == '__main__':
 #     app.run(debug=True)
