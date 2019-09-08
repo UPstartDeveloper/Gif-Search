@@ -44,8 +44,10 @@ def get_gifs(gif_type):
             content = content[starting_content_index:]
             starting_content_index = content.find('"url"')
             gif_link = content[starting_content_index + 8: content.find(',') - 1]
-            gif_link = f"\'gif_link\'"
-            gif_links.append(gif_link)
+          
+            # gif_links.append("\"" + gif_link + "\"")
+            gif_links.append("{}".format(gif_link))
+            print("\"" + gif_link + "\"")
             content = content[content.find(',') - 1:]
         r.close()
 
