@@ -27,6 +27,7 @@ def index():
     msg = 'GIF SEARCH!'
     return render_template("index.html", msg = msg)
 
+
 def get_gifs(gif_type):
     r = requests.get(
         "https://api.tenor.com/v1/search?q=%s&key=%s&limit=%s" %
@@ -38,7 +39,7 @@ def get_gifs(gif_type):
         # load the GIFs using the urls for smaller GIF sizes
         content = str(r.content)
 
-        while len(gif_links) < 10:
+        while len(gif_links) < limit:
             starting_content_index = content.find('"mediumgif"')
             content = content[starting_content_index:]
             starting_content_index = content.find('"url"')
@@ -47,10 +48,10 @@ def get_gifs(gif_type):
             content = content[content.find(',') - 1:]
         r.close()
 
-        return gif_links    
+        return gif_links
     else:
         top_ten = None
-    
+
 
 @app.route('/getGif')
 def get_gif():
