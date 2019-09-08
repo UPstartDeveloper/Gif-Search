@@ -1,27 +1,45 @@
 from flask import Flask, render_template, request
 import requests
 import json
+import ast
 
 app = Flask(__name__)
 
 # lines inspired by https://tenor.com/gifapi/documentation#quickstart-search
 # set the API key and limit for search result
 api_key = "EDBOKVM2ES41"
-limit = 1  # number of search results
+limit = 10  # number of search results
 
 # test search term
-search_term = "excited"
+search_term = "happiness"
 
 r = requests.get(
     "https://api.tenor.com/v1/search?q=%s&key=%s&limit=%s" %
     (search_term, api_key, limit))
 
+gif_links = []
+
 if r.status_code == 200:
     # load the GIFs using the urls for smaller GIF sizes
-    print(r.content)
+    content = str(r.content)
+
+    while len(gif_links) < 10:
+        starting_content_index = content.find('"mediumgif"')
+        content = content[starting_content_index:]
+        starting_content_index = content.find('"url"')
+        gif_link = content[starting_content_index + 8: content.find(',') - 1]
+        gif_links.append(gif_link)
+        content = content[content.find(',') - 1:]
+
     r.close()
+
+    for link in gif_links:
+        print(link)
+   
 else:
     top_ten = None
+
+
 
 
 # @app.route('/')
