@@ -1,0 +1,26 @@
+/*
+ * Add styling rules to the follow HTML tags on the webpages (where applicable):
+ */
+
+/* Page title rules */
+body{
+    background: red;
+}
+h1 {
+    color: blue;
+}
+
+
+/* Search bar rules */
+form {
+
+}
+
+input {
+
+}
+
+/* Search button rules */
+button {
+
+}
