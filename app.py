@@ -10,22 +10,12 @@ app = Flask(__name__)
 api_key = "EDBOKVM2ES41"
 limit = 10  # number of search results
 
+
 @app.route('/')
 def index():
-    # """Return homepage."""
-    # return "Hello there user!"
-    # TODO: Extract query term from url
-
-    # TODO: Make 'params' dict with query term and API key
-
-    # TODO: Make an API call to Tenor using the 'requests' library
-
-    # TODO: Get the first 10 results from the search results
-
-    # TODO: Render the 'index.html' template, passing the gifs
-    # as a named parameter
+    """Return homepage."""
     msg = 'GIF SEARCH!'
-    return render_template("index.html", msg = msg)
+    return render_template("index.html", msg=msg)
 
 
 def get_gifs(gif_type):
@@ -44,7 +34,7 @@ def get_gifs(gif_type):
             content = content[starting_content_index:]
             starting_content_index = content.find('"url"')
             gif_link = content[starting_content_index + 8: content.find(',') - 1]
-          
+
             # gif_links.append("\"" + gif_link + "\"")
             gif_links.append("{}".format(gif_link))
             print("\"" + gif_link + "\"")
