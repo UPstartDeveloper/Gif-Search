@@ -3,9 +3,13 @@
  */
 
 /* Page title rules */
-h1 {
-
+body{
+    background: red;
 }
+h1 {
+    color: blue;
+}
+
 
 /* Search bar rules */
 form {
