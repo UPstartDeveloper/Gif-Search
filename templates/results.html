@@ -3,15 +3,15 @@
 {% block content %}
 {% if gif_list %}
     Search results:
-   
+
     {% for link in gif_list %}
     <br>
     <img src = {{link}} alt = gif_type/>
-   
+
     {% endfor %}
-    
+
 {% else %}
-    Sorry, I can't find anything for you right now.
+    Sorry, I can't find anything for you right now. Please go back and try another search term.
 {% endif %}
 
 {% endblock %}
