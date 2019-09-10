@@ -2,6 +2,7 @@ from flask import Flask, render_template, request
 import requests
 import json
 import ast
+from pprint import pprint
 
 app = Flask(__name__)
 
@@ -26,25 +27,14 @@ def get_gifs(gif_type):
     gif_links = []
 
     if r.status_code == 200:
-        # load the GIFs using the urls for smaller GIF sizes
-        content = str(r.content)
-
-        while len(gif_links) < limit:
-            starting_content_index = content.find('"mediumgif"')
-            content = content[starting_content_index:]
-            starting_content_index = content.find('"url"')
-            gif_link = content[starting_content_index + 8: content.find(',') - 1]
-
-            # gif_links.append("\"" + gif_link + "\"")
-            gif_links.append("{}".format(gif_link))
-            print("\"" + gif_link + "\"")
-            content = content[content.find(',') - 1:]
-        r.close()
-
+        # Use JSON from content to get URLs
+        content_json = r.json()
+        results_json = content_json['results']
+        for result in results_json:
+            gif_links.append(result['media'][0]['mediumgif']['url'])
         return gif_links
     else:
         top_ten = None
-
 
 @app.route('/getGif')
 def get_gif():
@@ -55,5 +45,5 @@ def get_gif():
         displayString += link + '<br>'
     return render_template('results.html', gif_list=gif_list, gif_type=gif_type, link=link)
 
-# if __name__ == '__main__':
-#     app.run(debug=True)
+if __name__ == '__main__':
+    app.run(debug=True)
