@@ -2,25 +2,29 @@
  * Add styling rules to the follow HTML tags on the webpages (where applicable):
  */
 
-/* Page title rules */
-body{
+/* Page title selector */
+body {
     background: red;
 }
+
 h1 {
     color: blue;
 }
 
 
-/* Search bar rules */
+/* Search bar selector */
 form {
 
 }
 
 input {
-
+    border: 10px solid #98fb98;
+    border-radius: 5;
+    -webkit-appearance: none;
 }
 
-/* Search button rules */
+/* Search button selector */
 button {
+
 
 }
