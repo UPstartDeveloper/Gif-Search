@@ -4,7 +4,7 @@
 
 /* Page title selector */
 body {
-    background: red;
+    background: rgb(240, 270, 15);
 }
 
 h1 {
@@ -25,6 +25,5 @@ input {
 
 /* Search button selector */
 button {
-
-
+    border: 10px solid #98fb98;
 }
