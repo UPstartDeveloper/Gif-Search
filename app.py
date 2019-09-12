@@ -14,9 +14,12 @@ limit = 10  # number of search results
 
 @app.route('/')
 def index():
-    """Return homepage."""
-    msg = 'GIF SEARCH!'
-    return render_template("index.html", msg=msg)
+    """Return webpage."""
+    gif_type = request.args.get('gif_type')
+    if (gif_type is None):
+        gif_type = ''
+    gif_list = get_gifs(gif_type)
+    return render_template("index.html", gif_list=gif_list, gif_type=gif_type)
 
 
 def get_gifs(gif_type):
@@ -34,16 +37,8 @@ def get_gifs(gif_type):
             gif_links.append(result['media'][0]['mediumgif']['url'])
         return gif_links
     else:
+        # Current bug
         top_ten = None
-
-@app.route('/getGif')
-def get_gif():
-    gif_type = request.args.get('gif_type')
-    gif_list = get_gifs(gif_type)
-    displayString = ""
-    for link in gif_list:
-        displayString += link + '<br>'
-    return render_template('results.html', gif_list=gif_list, gif_type=gif_type, link=link)
 
 if __name__ == '__main__':
     app.run(debug=True)

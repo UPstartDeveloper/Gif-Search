@@ -1,23 +1,36 @@
-
 <!-- TODO: Extend 'base.html' and put content into a block 'body' to match -->
 {% extends 'base.html' %}
 
 {% block content %}
-    <body>
-       <h1>
-            {{ msg }}
-       </h1> 
 
-        <form action='/getGif'>
+    <body>
+        <h1>
+            GIF SEARCH!
+        </h1>
+
+        <form action='/'>
             GIF Type?
             <input type="text" name="gif_type"></input>
             <button type="submit">Submit</button>
         </form>
     </body>
+
+    {% if gif_list %}
+        Search results:
+
+        {% for link in gif_list %}
+        <br>
+        <img src={{link}} alt=gif_type />
+
+        {% endfor %}
+
+    {% else %}
+        <img src = http://b-connected.com/images/no-result.png alt = 'Sorry, No Results Found!'/>
+    {% endif %}
 {% endblock %}
 <!-- TODO: Make an HTML form containing a search box and a submit button to add
     the search term to the query string -->
-    
+
 <!-- TODO: Make a for loop to loop over GIFs passed in from the server -->
 
 <!-- TODO: For each gif, include the 'gif.html' template to display it -->
