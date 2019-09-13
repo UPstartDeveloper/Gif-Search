@@ -21,11 +21,11 @@ def index():
     gif_type = request.args.get('gif_type')
     if (gif_type is None):
         gif_type = ''
-    gif_list = get_gifs(gif_type)
-    return render_template("index.html", gif_list=gif_list, gif_type=gif_type)
+    gif_info = get_gif_info(gif_type)
+    return render_template("index.html", gif_info=gif_info, gif_type=gif_type)
 
 
-def get_gifs(gif_type):
+def get_gif_info(gif_type):
     """
     A function to dislay search results.
     Input: gif_type, a string storing user's search query
@@ -34,21 +34,19 @@ def get_gifs(gif_type):
     r = requests.get(
         "https://api.tenor.com/v1/search?q=%s&key=%s&limit=%s" %
         (gif_type, api_key, limit))
-
-    gif_links = []  # stores URL links to gif images
-
+    gif_info = []
     if r.status_code == 200:
         # Use JSON from content to get URLs
-        content_json = r.json()
-        results_json = content_json['results']
-        for result in results_json:
-            gif_links.append(result['media'][0]['mediumgif']['url'])
-        return gif_links
+        json_content = r.json()
+        json_results = json_content['results']
+        for result in json_results:
+            gif_info.append({'id':result['id'], 'itemurl':result['itemurl'], 'url':result['media'][0]['mediumgif']['url']})
+            print({'id':result['id'], 'itemurl':result['itemurl'], 'url':result['media'][0]['mediumgif']['url']})
+        return gif_info
     else:
         # Current bug
-
         top_ten = None
-
+    return gif_info
 
 '''
 def top_ten():
