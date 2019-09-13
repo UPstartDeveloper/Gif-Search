@@ -12,13 +12,13 @@
         <form action='/'>
             GIF Type?
             <input type="text" name="gif_type"></input>
-            <button type="submit">Submit</button>
+            <button type="sumbit" name="search" value="search" >Submit</button>
         </form>
 
 <!--This button will display the top ten trending GIFs on Tenor.-->
         <form action='/'>
             See what's trending on Tenor!
-            <button type="submit">Click me!</button>
+            <button type="submit" name="trending" value="trending">Click me!</button>
         </form>
 
     </body>
@@ -40,22 +40,5 @@
         <img src = http://b-connected.com/images/no-result.png alt = 'Sorry, No Results Found!'/>
     {% endif %}
 
-<!-- If block to render top ten trending GIFs from Tenor
-    {% if trending %}
-        Top 10 Trending on Tenor:
-
-        {% for link in trending %}
-        <br>
-        <img src={{link}} alt=gif_type />
-
-        {% endfor %}
-
-    {% else %}
-        <img src = http://b-connected.com/images/no-result.png alt = 'Sorry, No Results Found!'/>
-    {% endif %}
-    -->
-
 {% endblock %}
 
-
-<!-- For each gif, include the 'gif.html' template to display it -->
