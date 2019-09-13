@@ -13,7 +13,11 @@ limit = 10  # number of search results
 
 @app.route('/')
 def index():
-    """Return home page."""
+    """
+    Return home page.
+    Input: URL request
+    Output: renders data using index.html
+    """
     gif_type = request.args.get('gif_type')
     if (gif_type is None):
         gif_type = ''
@@ -22,11 +26,16 @@ def index():
 
 
 def get_gifs(gif_type):
+    """
+    A function to dislay search results.
+    Input: gif_type, a string storing user's search query
+    Output: a list of the URL links to 10 GIF images
+    """
     r = requests.get(
         "https://api.tenor.com/v1/search?q=%s&key=%s&limit=%s" %
         (gif_type, api_key, limit))
 
-    gif_links = []
+    gif_links = []  # stores URL links to gif images
 
     if r.status_code == 200:
         # Use JSON from content to get URLs
@@ -40,10 +49,13 @@ def get_gifs(gif_type):
 
         top_ten = None
 
+
 '''
 def top_ten():
     """
     Returns the top ten trending GIFs on Tenor.
+    Input: user clicks on button on index.html
+    Output: a list of 10 URL links to popular GIFs on Tenor.
     """
     default_locale = requests.get(  # take top 10 trending from default locale
         "https://api.tenor.com/v1/trending?key=%s&limit=%s" % (api_key, limit))
