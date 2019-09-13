@@ -24,7 +24,7 @@ def index():
         gif_type = ''
         gif_info = get_gif_info(
             gif_type, "https://api.tenor.com/v1/trending?key=%s&limit=%s")
-    return render_template("index.html", gif_info=gif_info, gif_type=gif_type)
+        return render_template("index.html", gif_info=gif_info, gif_type=gif_type)
 
     gif_type = request.args.get('gif_type')
     if gif_type is None:
@@ -56,11 +56,7 @@ def get_gif_info(gif_type, api_link):
         json_content = r.json()
         json_results = json_content['results']
         for json_result in json_results:
-            gif_info.append(
-                {'id': json_result['id'],
-                 'itemurl': json_result['itemurl'],
-                 'url': json_result['media'][0]['mediumgif']['url']})
-        return gif_info
+            gif_info.append({'id': json_result['id'],'itemurl': json_result['itemurl'],'url': json_result['media'][0]['mediumgif']['url']})
     else:
         # Current bug
         top_ten = None
@@ -69,3 +65,4 @@ def get_gif_info(gif_type, api_link):
 
 if __name__ == '__main__':
     app.run(debug=True)
+
