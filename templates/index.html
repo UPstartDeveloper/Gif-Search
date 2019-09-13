@@ -13,9 +13,17 @@
             <input type="text" name="gif_type"></input>
             <button type="submit">Submit</button>
         </form>
+
+<!--This button will display the top ten trending GIFs on Tenor.-->
+        <form action='/'>
+            See what's trending on Tenor!
+            <button type="submit">Click me!</button>
+        </form>
+
     </body>
 
-    {% if gif_list %}
+<!-- If block to render user search results -->
+    {% if gif_list|length > 0 %}
         Search results:
 
         {% for link in gif_list %}
@@ -27,6 +35,22 @@
     {% else %}
         <img src = http://b-connected.com/images/no-result.png alt = 'Sorry, No Results Found!'/>
     {% endif %}
+
+<!-- If block to render top ten trending GIFs from Tenor
+    {% if trending %}
+        Top 10 Trending on Tenor:
+
+        {% for link in trending %}
+        <br>
+        <img src={{link}} alt=gif_type />
+
+        {% endfor %}
+
+    {% else %}
+        <img src = http://b-connected.com/images/no-result.png alt = 'Sorry, No Results Found!'/>
+    {% endif %}
+     -->
+
 {% endblock %}
 <!-- TODO: Make an HTML form containing a search box and a submit button to add
     the search term to the query string -->

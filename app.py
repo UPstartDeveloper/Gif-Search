@@ -7,14 +7,13 @@ from pprint import pprint
 app = Flask(__name__)
 
 # lines inspired by https://tenor.com/gifapi/documentation#quickstart-search
-# set the API key and limit for search result
-api_key = "EDBOKVM2ES41"
+api_key = "EDBOKVM2ES41"  # stores the API key
 limit = 10  # number of search results
 
 
 @app.route('/')
 def index():
-    """Return webpage."""
+    """Return home page."""
     gif_type = request.args.get('gif_type')
     if (gif_type is None):
         gif_type = ''
@@ -38,7 +37,25 @@ def get_gifs(gif_type):
         return gif_links
     else:
         # Current bug
+
         top_ten = None
+
+'''
+def top_ten():
+    """
+    Returns the top ten trending GIFs on Tenor.
+    """
+    default_locale = requests.get(  # take top 10 trending from default locale
+        "https://api.tenor.com/v1/trending?key=%s&limit=%s" % (api_key, limit))
+
+    if default_locale == 200:
+        trending = json.loads(default_locale.content)
+    else:
+        trending = None
+
+    # load the results
+    return render_template()
+'''
 
 if __name__ == '__main__':
     app.run(debug=True)
