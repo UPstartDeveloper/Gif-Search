@@ -10,6 +10,7 @@ app = Flask(__name__)
 api_key = "EDBOKVM2ES41"  # stores the API key
 limit = 10  # number of search results
 
+
 @app.route('/')
 def index():
     """
@@ -21,21 +22,25 @@ def index():
     # Enables random GIFs to show.
     if request.args.get('random'):
         gif_type = 'pizza'
-        gif_info = get_gif_info(gif_type, "https://api.tenor.com/v1/random?q=%s&key=%s&limit=%s")
-        return render_template("index.html", gif_info=gif_info, gif_type=gif_type)
+        gif_info = get_gif_info(
+            gif_type, "https://api.tenor.com/v1/random?q=%s&key=%s&limit=%s")
+        return render_template(
+            "index.html", gif_info=gif_info, gif_type=gif_type)
 
     # Enables top trends GIFs to show
     if request.args.get('trending'):
         gif_type = ''
         gif_info = get_gif_info(
             gif_type, "https://api.tenor.com/v1/trending?key=%s&limit=%s")
-        return render_template("index.html", gif_info=gif_info, gif_type=gif_type)
+        return render_template(
+            "index.html", gif_info=gif_info, gif_type=gif_type)
 
     gif_type = request.args.get('gif_type')
     if gif_type is None:
         gif_type = ''
 
-    gif_info = get_gif_info(gif_type, "https://api.tenor.com/v1/search?q=%s&key=%s&limit=%s")
+    gif_info = get_gif_info(
+        gif_type, "https://api.tenor.com/v1/search?q=%s&key=%s&limit=%s")
 
     return render_template("index.html", gif_info=gif_info, gif_type=gif_type)
 
@@ -52,8 +57,7 @@ def get_gif_info(gif_type, api_link):
             api_link %
             (api_key, limit))
     elif 'random' in api_link:
-        r = requests.get(api_link %
-            (gif_type, api_key, limit))
+        r = requests.get(api_link % (gif_type, api_key, limit))
     else:
         r = requests.get(
             api_link % (gif_type, api_key, limit))
