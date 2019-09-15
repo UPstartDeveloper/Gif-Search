@@ -3,7 +3,7 @@ import requests
 import json
 import ast
 
-# Library for generating random words
+# Library for generating random words. Also install pypandoc
 from randomwordgenerator import randomwordgenerator
 
 from pprint import pprint
@@ -31,7 +31,7 @@ def index():
         gif_info = []
         while len(gif_info) < 10:
             gif_type = randomwordgenerator.generate_random_words(n = 1)
-        
+
             gif_info = get_gif_info(
                 gif_type, "https://api.tenor.com/v1/random?q=%s&key=%s&limit=%s")
         return render_template(
