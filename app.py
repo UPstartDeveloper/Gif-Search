@@ -31,6 +31,7 @@ def index():
         gif_info = []
         while len(gif_info) < 10:
             gif_type = randomwordgenerator.generate_random_words(n = 1)
+        
             gif_info = get_gif_info(
                 gif_type, "https://api.tenor.com/v1/random?q=%s&key=%s&limit=%s")
         return render_template(
