@@ -2,13 +2,20 @@ from flask import Flask, render_template, request
 import requests
 import json
 import ast
+
+# Library for generating random words
+from randomwordgenerator import randomwordgenerator
+
 from pprint import pprint
 
 app = Flask(__name__)
+# Initialize r as <class> RandomWords to access random words
 
 # lines inspired by https://tenor.com/gifapi/documentation#quickstart-search
 api_key = "EDBOKVM2ES41"  # stores the API key
 limit = 10  # number of search results
+
+
 
 
 @app.route('/')
@@ -21,9 +28,11 @@ def index():
 
     # Enables random GIFs to show.
     if request.args.get('random'):
-        gif_type = 'pizza'
-        gif_info = get_gif_info(
-            gif_type, "https://api.tenor.com/v1/random?q=%s&key=%s&limit=%s")
+        gif_info = []
+        while len(gif_info) < 10:
+            gif_type = randomwordgenerator.generate_random_words(n = 1)
+            gif_info = get_gif_info(
+                gif_type, "https://api.tenor.com/v1/random?q=%s&key=%s&limit=%s")
         return render_template(
             "index.html", gif_info=gif_info, gif_type=gif_type)
 
