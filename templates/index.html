@@ -32,15 +32,17 @@
 <!-- If block to render user search results -->
     {% if gif_info|length > 0 %}
         Search results:
+        <div class = "flex-container">
         <!-- Make a for loop to loop over GIFs passed in from the server -->
         {% for info in gif_info %}
 
-        <div class="tenor-gif-embed" data-postid="{{ info['id'] }}" data-share-method="host" data-width="500px"
+            <div class="tenor-gif-embed" data-postid="{{ info['id'] }}" data-share-method="host" data-width="500px"
             data-aspect-ratio="1.2266666666666666">
-            <a href="{info['itemurl'] }}"></a>
-            <a href="{{info['url'] }}"></a>
-        </div>
+                <a href="{info['itemurl'] }}"></a>
+                <a href="{{info['url'] }}"></a>
+            </div>
         {% endfor %}
+        </div>
 
     {% else %}
         <img src = http://b-connected.com/images/no-result.png alt = 'Sorry, No Results Found!'/>

@@ -27,3 +27,21 @@ input {
 button {
     border: 10px solid #98fb98;
 }
+
+/* Rendering of GIF images. */
+.flex-container {
+    display: flex;
+    height: 300px;
+    flex-flow: row wrap;
+    justify-content: : space-around;
+
+    /*flex-direction: column;
+    flex-wrap: wrap; */
+
+}
+
+.tenor-gif-embed {
+    margin: auto;
+    width: 500px;
+    height: 500px;
+}
