@@ -31,15 +31,14 @@ button {
 /* Rendering of GIF images. */
 .flex-container {
     display: grid;
-    grid-auto-columns: 100px;
-    grid-auto-rows: 400px;
+    grid-auto-columns: 500px;
+    grid-auto-rows: 500px;
     /* height: 300px;
     flex-flow: row wrap;
     justify-content: : space-around;
 
     flex-direction: column;
     flex-wrap: wrap; */
-
 }
 
 .tenor-gif-embed {
