@@ -11,8 +11,15 @@
             the search term to the query string -->
         <form action='/'>
             GIF Type?
-            <input type="text" name="gif_type"></input>
-            <button type="sumbit" name="search" value="search" >Submit</button>
+            
+            <input type="text" name="gif_type" autofocus onkeypress = "myFunction()" id = "text" value = "{{value}}" onfocus="testing()"></input>
+            <button type="sumbit" name="search" value="search" id="search" >Submit</button>
+           
+            <script>
+            function myFunction() {
+                setTimeout(function(){document.getElementById("search").click();}, 300)
+            }
+            </script>
         </form>
 
 <!--This button will display the top ten trending GIFs on Tenor.-->
@@ -35,7 +42,6 @@
         <div class = "flex-container">
         <!-- Make a for loop to loop over GIFs passed in from the server -->
         {% for info in gif_info %}
-
             <div class="tenor-gif-embed" data-postid="{{ info['id'] }}" data-share-method="host" data-width="500px"
             data-aspect-ratio="1.2266666666666666">
                 <a href="{info['itemurl'] }}"></a>
@@ -43,7 +49,6 @@
             </div>
         {% endfor %}
         </div>
-
     {% else %}
         <img src = "http://b-connected.com/images/no-result.png" alt = 'Sorry, No Results Found!'/>
     {% endif %}
