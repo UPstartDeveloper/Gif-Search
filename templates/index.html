@@ -2,7 +2,9 @@
 {% extends 'base.html' %}
 
 {% block content %}
-
+    <head>
+        <script src="jquery-3.4.1.min.js"></script>
+        </head>
     <body>
         <h1>
             GIF SEARCH!
@@ -14,12 +16,18 @@
 
             <input type="text" name="gif_type" autofocus onkeypress = "myFunction()" id = "text" value = "{{value}}" onfocus="testing()"></input>
             <button type="sumbit" name="search" value="search" id="search" >Submit</button>
-
+            <!--
             <script>
             function myFunction() {
                 setTimeout(function(){document.getElementById("search").click();}, 300)
             }
             </script>
+            <script type="text/javascript">
+
+                    $('#search').change('paste',keyup,click){
+                        $.post('/ssomeroute', text, function(){
+                    }
+            </script>-->
         </form>
 
 <!--This button will display the top ten trending GIFs on Tenor.-->
