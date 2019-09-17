@@ -29,7 +29,7 @@ button {
 }
 
 /* Rendering of GIF images. */
-.flex-container {
+.grid-container {
     display: grid;
     grid-auto-columns: 500px;
     grid-auto-rows: 500px;
