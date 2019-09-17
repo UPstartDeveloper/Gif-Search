@@ -53,7 +53,10 @@ def index():
     gif_info = get_gif_info(
         gif_type, "https://api.tenor.com/v1/search?q=%s&key=%s&limit=%s")
 
-    return render_template("index.html", gif_info=gif_info, gif_type=gif_type, value=value)
+    return render_template(
+        "index.html",
+        gif_info=gif_info,
+        gif_type=gif_type, value=value)
 
 
 def get_gif_info(gif_type, api_link):

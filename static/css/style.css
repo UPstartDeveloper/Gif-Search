@@ -32,14 +32,10 @@ button {
 .grid-container {
     display: grid;
     grid-template-columns: auto auto auto;
-    grid-auto-columns: 500px;
-    grid-auto-rows: 500px;
-    /* height: 300px;
-    flex-flow: row wrap;
-    justify-content: : space-around;
+    padding: 10px;
+    /*grid-auto-columns: 500px;
+    grid-auto-rows: 500px;*/
 
-    flex-direction: column;
-    flex-wrap: wrap; */
 }
 
 .tenor-gif-embed {
@@ -47,4 +43,5 @@ button {
     width: 500px;
     height: 500px;
     align-content: center;
+
 }
