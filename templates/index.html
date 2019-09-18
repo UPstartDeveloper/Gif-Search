@@ -4,6 +4,8 @@
 {% block content %}
     <head>
         <script src="jquery-3.4.1.min.js"></script>
+        <!--Inspired by W3Schools-->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         </head>
     <body>
         <h1>
@@ -13,15 +15,8 @@
             the search term to the query string -->
         <form action='/'>
             GIF Type?
-
             <input type="text" name="gif_type" autofocus onkeypress = "myFunction()" id = "text" value = "{{value}}" onfocus="testing()"></input>
-            <button type="sumbit" name="search" value="search" id="search" >Submit</button>
-            
-            <script>
-                $('#text').on('input', function() {
-
-                }); 
-            </script>
+            <button type="sumbit" name="search" value="search" id="search" >Submit</button>   
         </form>
 
 <!--This button will display the top ten trending GIFs on Tenor.-->
@@ -38,10 +33,20 @@
 
     </body>
 
+
+<!--Inspired by Gary Frederick-->
+<script>
+        $(document).ready(function(){
+            $('#text').on('input', function(){
+                 $('#gifs').text("Got rid of the gifs")
+            })
+        })
+ </script>
+
 <!-- If block to render user search results -->
     {% if gif_info|length > 0 %}
         Search results:
-        <div class = "grid-container">
+        <div class = "grid-container" id = "gifs">
         <!-- Make a for loop to loop over GIFs passed in from the server -->
         {% for info in gif_info %}
             <div class="tenor-gif-embed" data-postid="{{ info['id'] }}" data-share-method="host" data-width="500px"
