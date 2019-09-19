@@ -4,6 +4,7 @@
 {% block content %}
     <head>
         <script src="jquery-3.4.1.min.js"></script>
+        <script type="text/javascript" src = "../static/jquery/liveResults.js"></script>
         <!--Inspired by W3Schools-->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         </head>
@@ -33,25 +34,56 @@
 
     </body>
 
-
-<!--Inspired by Gary Frederick-->
 <script>
-        $(document).ready(function(){
-            $('#text').on('input', function(){
-                 $('#gifs').text("Got rid of the gifs")
-            })
+// Inspired by Gary Frederick
+
+    function updateGIFs(gifURLs){
+        var newHTMLSourceCode = ""
+
+        for (var index = 0; index < 10; index++){
+            newHTMLSourceCode += "<div>"
+            newHTMLSourceCode += "<img src = \"" + gifURLs[index] + "\" style='width: 500px; height: 500px; object-fit: cover;'>"
+            newHTMLSourceCode += "</div>"
+        }
+
+        $('#gifs').html(newHTMLSourceCode);
+        
+    }
+
+    function getSuggestions(search){
+        var gifURLs = new Array()
+        $.getJSON("https://api.tenor.com/v1/search?q=" + search + "&key=EDBOKVM2ES41&limit=10", function(data) {
+            var jsonContent = data
+            var jsonResults = jsonContent['results']
+            // Iterate through elements of jsonResults
+            for (var index = 0; index < jsonResults.length; index++){
+                gifURLs.push(jsonResults[index]['media'][0]['mediumgif']['url'])
+            }
+
+        updateGIFs(gifURLs)
+    });
+    }
+    
+
+    $(document).ready(function(){
+        $('#text').on('input', function(){
+            
+           getSuggestions($('#text').val())
         })
+    })
+
+
+
  </script>
 
 <!-- If block to render user search results -->
     {% if gif_info|length > 0 %}
         Search results:
-        <div class = "grid-container" id = "gifs">
+        <div class = "grid-container" id = "gifs" data-aspect-ratio="1.2266666666666666" >
         <!-- Make a for loop to loop over GIFs passed in from the server -->
         {% for info in gif_info %}
-            <div class="tenor-gif-embed" data-postid="{{ info['id'] }}" data-share-method="host" data-width="500px"
-            data-aspect-ratio="1.2266666666666666">
-                <a href="{info['itemurl'] }}"></a>
+            <div class="tenor-gif-embed" data-postid="{{ info['id'] }}" data-share-method="host" data-width="500px">
+                <a href="{{info['itemurl'] }}"></a>
                 <a href="{{info['url'] }}"></a>
             </div>
         {% endfor %}
