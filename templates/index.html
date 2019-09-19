@@ -39,14 +39,17 @@
 
     function updateGIFs(gifURLs){
         var newHTMLSourceCode = ""
-
-        for (var index = 0; index < 10; index++){
+        for (var index = 0; index < gifURLs.length; index++){
             newHTMLSourceCode += "<div>"
             newHTMLSourceCode += "<img src = \"" + gifURLs[index] + "\" style='width: 500px; height: 500px; object-fit: cover;'>"
             newHTMLSourceCode += "</div>"
         }
-
-        $('#gifs').html(newHTMLSourceCode);
+        if (gifURLs.length == 0){
+            $('#gifs').html("<img src = \"http://b-connected.com/images/no-result.png\" alt = 'Sorry, No Results Found!'/>")
+        }else{
+            $('#gifs').html(newHTMLSourceCode);
+        }
+        
         
     }
 
@@ -56,10 +59,11 @@
             var jsonContent = data
             var jsonResults = jsonContent['results']
             // Iterate through elements of jsonResults
-            for (var index = 0; index < jsonResults.length; index++){
-                gifURLs.push(jsonResults[index]['media'][0]['mediumgif']['url'])
-            }
 
+            for (var index = 0; index < jsonResults.length; index++){
+                var result = jsonResults[index]['media'][0]['mediumgif']['url']
+                gifURLs.push(result)
+            }
         updateGIFs(gifURLs)
     });
     }
