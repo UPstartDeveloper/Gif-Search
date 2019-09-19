@@ -1,40 +1,35 @@
 from flask import Flask, render_template, request
 import requests
-import json
-import ast
 
-# Library for generating random words. Also install pypandoc
+# Install pypandoc, then install randomwordgenerator library
+# Now you have a library to generate random words.
 from randomwordgenerator import randomwordgenerator
 
-from pprint import pprint
-
+# Initialize Flask object
 app = Flask(__name__)
-# Initialize r as <class> RandomWords to access random words
+
 
 # lines inspired by https://tenor.com/gifapi/documentation#quickstart-search
 api_key = "EDBOKVM2ES41"  # stores the API key
 limit = 10  # number of search results
 
-
 @app.route('/')
 def index():
-    value = ''
     """
     Return home page and activate button functionality.
     Input: URL request
     Output: renders data using index.html
     """
+    
     # Enables random GIFs to show.
     if request.args.get('random'):
         gif_info = []
         while len(gif_info) < 10:
             gif_type = randomwordgenerator.generate_random_words(n=1)
-            gif_info = get_gif_info(
-                gif_type,
-                "https://api.tenor.com/v1/random?q=%s&key=%s&limit=%s")
+            gif_info = get_gif_info(gif_type,"https://api.tenor.com/v1/random?q=%s&key=%s&limit=%s")
 
         return render_template(
-            "index.html", gif_info=gif_info, gif_type=gif_type, value=value)
+            "index.html", gif_info=gif_info, gif_type=gif_type)
 
     # Enables top trends GIFs to show
     if request.args.get('trending'):
@@ -42,21 +37,18 @@ def index():
         gif_info = get_gif_info(
             gif_type, "https://api.tenor.com/v1/trending?key=%s&limit=%s")
         return render_template(
-            "index.html", gif_info=gif_info, gif_type=gif_type, value=value)
+            "index.html", gif_info=gif_info, gif_type=gif_type)
 
     gif_type = request.args.get('gif_type')
-    value = request.args.get('gif_type')
-    if gif_type is None or value is None:
-        gif_type = ''
-        value = ''
-    print("Testing ... ", value)
+    if gif_type is None:
+        gif_type = ""
     gif_info = get_gif_info(
         gif_type, "https://api.tenor.com/v1/search?q=%s&key=%s&limit=%s")
 
     return render_template(
         "index.html",
         gif_info=gif_info,
-        gif_type=gif_type, value=value)
+        gif_type=gif_type)
 
 
 def get_gif_info(gif_type, api_link):

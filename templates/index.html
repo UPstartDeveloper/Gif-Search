@@ -16,8 +16,7 @@
             the search term to the query string -->
         <form action='/'>
             GIF Type?
-            <input type="text" name="gif_type" autofocus onkeypress = "myFunction()" id = "text" value = "{{value}}" onfocus="testing()"></input>
-            <button type="sumbit" name="search" value="search" id="search" >Submit</button>   
+            <input type="text" name="gif_type" id = "text" value = ""></input>
         </form>
 
 <!--This button will display the top ten trending GIFs on Tenor.-->
@@ -35,13 +34,12 @@
     </body>
 
 <script>
-// Inspired by Gary Frederick
 
     function updateGIFs(gifURLs){
         var newHTMLSourceCode = ""
         for (var index = 0; index < gifURLs.length; index++){
             newHTMLSourceCode += "<div>"
-            newHTMLSourceCode += "<img src = \"" + gifURLs[index] + "\" style='width: 500px; height: 500px; object-fit: cover;'>"
+            newHTMLSourceCode += "<img src = \"" + gifURLs[index] + "\" style='margin: auto; width: 500px; height: 400px; align-content: center;'>"
             newHTMLSourceCode += "</div>"
         }
         if (gifURLs.length == 0){
@@ -49,8 +47,6 @@
         }else{
             $('#gifs').html(newHTMLSourceCode);
         }
-        
-        
     }
 
     function getSuggestions(search){
@@ -59,7 +55,6 @@
             var jsonContent = data
             var jsonResults = jsonContent['results']
             // Iterate through elements of jsonResults
-
             for (var index = 0; index < jsonResults.length; index++){
                 var result = jsonResults[index]['media'][0]['mediumgif']['url']
                 gifURLs.push(result)
@@ -67,11 +62,9 @@
         updateGIFs(gifURLs)
     });
     }
-    
-
+    // Inspired by Gary Frederick
     $(document).ready(function(){
         $('#text').on('input', function(){
-            
            getSuggestions($('#text').val())
         })
     })
@@ -87,7 +80,7 @@
         <!-- Make a for loop to loop over GIFs passed in from the server -->
         {% for info in gif_info %}
             <div class="tenor-gif-embed" data-postid="{{ info['id'] }}" data-share-method="host" data-width="500px">
-                <a href="{{info['itemurl'] }}"></a>
+                <a href="{{info['itemurl']}}"></a>
                 <a href="{{info['url'] }}"></a>
             </div>
         {% endfor %}
