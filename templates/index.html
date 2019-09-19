@@ -2,12 +2,6 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <head>
-        <script src="jquery-3.4.1.min.js"></script>
-        <script type="text/javascript" src = "../static/jquery/liveResults.js"></script>
-        <!--Inspired by W3Schools-->
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-        </head>
     <body>
         <h1>
             GIF SEARCH!
@@ -35,43 +29,40 @@
 
 <script>
 
-    function updateGIFs(gifURLs){
-        var newHTMLSourceCode = ""
-        for (var index = 0; index < gifURLs.length; index++){
-            newHTMLSourceCode += "<div>"
-            newHTMLSourceCode += "<img src = \"" + gifURLs[index] + "\" style='margin: auto; width: 500px; height: 400px; align-content: center;'>"
-            newHTMLSourceCode += "</div>"
-        }
-        if (gifURLs.length == 0){
-            $('#gifs').html("<img src = \"http://b-connected.com/images/no-result.png\" alt = 'Sorry, No Results Found!'/>")
-        }else{
-            $('#gifs').html(newHTMLSourceCode);
-        }
-    }
-
-    function getSuggestions(search){
-        var gifURLs = new Array()
-        $.getJSON("https://api.tenor.com/v1/search?q=" + search + "&key=EDBOKVM2ES41&limit=10", function(data) {
-            var jsonContent = data
-            var jsonResults = jsonContent['results']
-            // Iterate through elements of jsonResults
-            for (var index = 0; index < jsonResults.length; index++){
-                var result = jsonResults[index]['media'][0]['mediumgif']['url']
-                gifURLs.push(result)
+        function updateGIFs(gifURLs){
+            var newHTMLSourceCode = ""
+            for (var index = 0; index < gifURLs.length; index++){
+                newHTMLSourceCode += "<div>"
+                newHTMLSourceCode += "<img src = \"" + gifURLs[index] + "\" style='margin: auto; width: 500px; height: 400px; align-content: center;'>"
+                newHTMLSourceCode += "</div>"
             }
-        updateGIFs(gifURLs)
-    });
-    }
-    // Inspired by Gary Frederick
-    $(document).ready(function(){
-        $('#text').on('input', function(){
-           getSuggestions($('#text').val())
+            if (gifURLs.length == 0){
+                $('#gifs').html("<img src = \"http://b-connected.com/images/no-result.png\" alt = 'Sorry, No Results Found!'/>")
+            }else{
+                $('#gifs').html(newHTMLSourceCode);
+            }
+        }
+    
+        function getSuggestions(search){
+            var gifURLs = new Array()
+            $.getJSON("https://api.tenor.com/v1/search?q=" + search + "&key=EDBOKVM2ES41&limit=10", function(data) {
+                var jsonContent = data
+                var jsonResults = jsonContent['results']
+                // Iterate through elements of jsonResults
+                for (var index = 0; index < jsonResults.length; index++){
+                    var result = jsonResults[index]['media'][0]['mediumgif']['url']
+                    gifURLs.push(result)
+                }
+            updateGIFs(gifURLs)
+        });
+        }
+        // Inspired by Gary Frederick
+        $(document).ready(function(){
+            $('#text').on('input', function(){
+                getSuggestions($('#text').val())
+            })
         })
-    })
-
-
-
- </script>
+        </script>
 
 <!-- If block to render user search results -->
     {% if gif_info|length > 0 %}

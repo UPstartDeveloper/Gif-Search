@@ -1,9 +1,15 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8">
-    <title>GIF Search</title>
-    <link rel="stylesheet" href="../static/css/style.css" type = "text/css">
+    {% block title %}
+        <!--Inspired by W3Schools, load jquery-->
+
+        <script type="text/javascript" src = "../js/liveResults.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <meta charset="utf-8">
+        <title>GIF Search</title>
+        <link rel="stylesheet" href="../static/css/style.css" type = "text/css">
+    {% endblock %}
 </head>
 
     <body>
