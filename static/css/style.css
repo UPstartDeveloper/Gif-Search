@@ -45,3 +45,13 @@ button {
     align-content: center;
 
 }
+
+@media only screen and (max-width: 1300px) { /* 13 in MacBook */
+.tenor-gif-embed {
+    margin: auto;
+    width: 300px;
+    height: 300px;
+    align-content: center;
+
+}
+}
