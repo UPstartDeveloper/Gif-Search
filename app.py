@@ -1,5 +1,8 @@
 from flask import Flask, render_template, request
 import requests
+import os
+from dotenv import load_dotenv
+load_dotenv()
 
 # Install pypandoc, then install randomwordgenerator library
 # Now you have a library to generate random words.
@@ -9,7 +12,7 @@ from randomwordgenerator import randomwordgenerator
 app = Flask(__name__)
 
 # lines inspired by https://tenor.com/gifapi/documentation#quickstart-search
-api_key = "EDBOKVM2ES41"  # stores the API key
+TENOR_API_KEY=os.getenv("TENOR_API_KEY")  # stores the API key
 limit = 10  # number of search results
 
 @app.route('/')
