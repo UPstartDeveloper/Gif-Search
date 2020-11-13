@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request
-import requests
+import request
 import os
 from dotenv import load_dotenv
 load_dotenv()
@@ -79,4 +79,4 @@ def get_gif_info(api_link, parameters):
     return gif_info
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, host='0.0.0.0')
