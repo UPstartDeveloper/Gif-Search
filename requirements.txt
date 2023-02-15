@@ -11,4 +11,4 @@ python-dotenv==0.15.0
 randomwordgenerator==1.0.0
 requests==2.22.0
 urllib3==1.26.5
-Werkzeug==0.15.5
+Werkzeug==2.2.3
